@@ -23,7 +23,7 @@ class GameDetails extends PureComponent {
   makeMove = (toRow, toCell) => {
     const { game, updateGame } = this.props
     const objX = findX(game.board)
-    console.log('objX:', objX)
+    const nextCells = nextPossible(objX)
     console.log('objX:', objX)
     console.log('nextCells:', nextCells)
 
