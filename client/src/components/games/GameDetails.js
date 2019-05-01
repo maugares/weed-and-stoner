@@ -24,6 +24,8 @@ class GameDetails extends PureComponent {
     const { game, updateGame } = this.props
     const objX = findX(game.board)
     console.log('objX:', objX)
+    console.log('objX:', objX)
+    console.log('nextCells:', nextCells)
 
     const board = game.board.map(
       (row, rowIndex) => row.map((cell, cellIndex) => {
