@@ -31,13 +31,25 @@ class GameDetails extends PureComponent {
     console.log('User clicking:', userId)
     console.log('Game:', game)
 
-    const board = game.board.map(
-      (row, rowIndex) => row.map((cell, cellIndex) => {
-        if (rowIndex === toRow && cellIndex === toCell) return game.turn
-        else return cell
-      })
-    )
-    updateGame(game.id, board)
+    if (userId === 1) {
+      const board1 = game.board1.map(
+        (row, rowIndex) => row.map((cell, cellIndex) => {
+          if (rowIndex === toRow && cellIndex === toCell) return game.round
+          else return cell
+        })
+      )
+      console.log(board1)
+      updateGame(game.id, board1)
+    } else if (userId === 2) {
+      const board2 = game.board2.map(
+        (row, rowIndex) => row.map((cell, cellIndex) => {
+          if (rowIndex === toRow && cellIndex === toCell) return game.round
+          else return cell
+        })
+      )
+      console.log(board2)
+      updateGame(game.id, board2)
+    }
   }
 
 
