@@ -3,30 +3,21 @@ import './Board.css'
 import { findX, nextPossible } from './Validation'
 
 const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, nextCells) => {
-  // console.log(`${rowIndex},${cellIndex}`)
-  // console.log('nextCells:', nextCells[0])
-  // console.log('rowIndex:', rowIndex)
-  // console.log('cellIndex:', cellIndex)
   const nextCell = nextCells[0]
 
-  // console.log(nextCell)
   const possibleArray = nextCell.map(possibility => {
     const possibleArray =
       possibility[0] === rowIndex && 
       possibility[1] === cellIndex
-    // console.log(possibleArray)
     return possibleArray
   })
 
-  const isPossible = possibleArray.indexOf(true) > -1
-  console.log(isPossible)
-
-  
+  const isPossible = possibleArray.indexOf(true) > -1  
 
   if (isPossible) {
     return (
       <button 
-        className="board-tile-choose"
+        className="board-tile-possible"
         disabled={hasTurn}
         onClick={() => makeMove(rowIndex, cellIndex)}
         key={`${rowIndex}-${cellIndex}`}
