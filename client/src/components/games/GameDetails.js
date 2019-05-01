@@ -22,14 +22,14 @@ class GameDetails extends PureComponent {
 
   makeMove = (toRow, toCell) => {
     const { game, updateGame, userId } = this.props
-    const clicked = [toRow, toCell]
-    const objX = findX(game.board)
-    const nextCells = nextPossible(objX)
-    console.log('objX:', objX)
-    console.log('nextCells:', nextCells)
-    console.log('Clicked:', clicked)
+    // const clicked = [toRow, toCell]
+    // const objX = findX(game.board)
+    // const nextCells = nextPossible(objX)
+    // console.log('objX:', objX)
+    // console.log('nextCells:', nextCells)
+    // console.log('Clicked:', clicked)
     console.log('User clicking:', userId)
-    console.log('Game:', game)
+    // console.log('Game:', game)
 
     if (userId === 1) {
       const board1 = game.board1.map(
@@ -91,7 +91,7 @@ class GameDetails extends PureComponent {
       <hr />
       {
         game.status !== 'pending' &&
-        <Board board={game.board} makeMove={this.makeMove} />
+        <Board game={game} makeMove={this.makeMove} />
       }
     </Paper>)
   }

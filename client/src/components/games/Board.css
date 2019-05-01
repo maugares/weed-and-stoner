@@ -2,3 +2,9 @@
   height: 50px;
   width: 50px;
 }
+
+.board-tile-choose {
+  background-color: rgba(0, 128, 0, 0.5);
+  height: 50px;
+  width: 50px;
+}
