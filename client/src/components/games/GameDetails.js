@@ -22,10 +22,12 @@ class GameDetails extends PureComponent {
 
   makeMove = (toRow, toCell) => {
     const { game, updateGame } = this.props
+    const clicked = [toRow, toCell]
     const objX = findX(game.board)
     const nextCells = nextPossible(objX)
     console.log('objX:', objX)
     console.log('nextCells:', nextCells)
+    console.log('Clicked:', clicked)
 
     const board = game.board.map(
       (row, rowIndex) => row.map((cell, cellIndex) => {
