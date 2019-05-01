@@ -86,7 +86,7 @@ export default class GameController {
 
     const player = await Player.findOne({ user, game })
 
-    console.log(player)
+    console.log(Player)
 
     if (!player) throw new ForbiddenError(`You are not part of this game`)
     if (game.status !== 'started') throw new BadRequestError(`The game is not started yet`)
