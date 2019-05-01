@@ -9,7 +9,6 @@ import Board from './Board'
 import './GameDetails.css'
 import { findX } from './Validation'
 
-
 class GameDetails extends PureComponent {
 
   componentWillMount() {
@@ -22,7 +21,9 @@ class GameDetails extends PureComponent {
   joinGame = () => this.props.joinGame(this.props.game.id)
 
   makeMove = (toRow, toCell) => {
-    const {game, updateGame} = this.props
+    const { game, updateGame } = this.props
+    const objX = findX(game.board)
+    console.log('objX:', objX)
 
     const board = game.board.map(
       (row, rowIndex) => row.map((cell, cellIndex) => {
@@ -30,16 +31,12 @@ class GameDetails extends PureComponent {
         else return cell
       })
     )
-
-    updateGame(game.id, game.board)
+    updateGame(game.id, board)
   }
+
 
   render() {
     const { game, users, authenticated, userId } = this.props
-    if (!!game) {
-      const objX = findX(game.board)
-      console.log('objX:', objX)
-    }
 
     if (!authenticated) return (
       <Redirect to="/login" />
@@ -64,20 +61,16 @@ class GameDetails extends PureComponent {
         player && player.symbol === game.turn &&
         <div>It's your turn!</div>
       }
-
       {
         game.status === 'pending' &&
         game.players.map(p => p.userId).indexOf(userId) === -1 &&
         <button onClick={this.joinGame}>Join Game</button>
       }
-
       {
         winner &&
         <p>Winner: {users[winner].firstName}</p>
       }
-
       <hr />
-
       {
         game.status !== 'pending' &&
         <Board board={game.board} makeMove={this.makeMove} />
@@ -85,16 +78,13 @@ class GameDetails extends PureComponent {
     </Paper>)
   }
 }
-
 const mapStateToProps = (state, props) => ({
   authenticated: state.currentUser !== null,
   userId: state.currentUser && userId(state.currentUser.jwt),
   game: state.games && state.games[props.match.params.id],
   users: state.users
 })
-
 const mapDispatchToProps = {
   getGames, getUsers, joinGame, updateGame
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)
