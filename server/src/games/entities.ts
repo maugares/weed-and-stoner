@@ -20,7 +20,7 @@ export class Game extends BaseEntity {
   board: Board
 
   @Column('char', {length:1, default: 'x'})
-  turn: Symbol
+  round: number
 
   @Column('char', {length:1, nullable: true})
   winner: Symbol
