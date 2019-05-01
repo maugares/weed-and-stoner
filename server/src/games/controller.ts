@@ -88,7 +88,7 @@ export default class GameController {
 
     const players = game.players
 
-    console.log('players:', players)
+    console.log('game:', game)
 
     if (!player) throw new ForbiddenError(`You are not part of this game`)
     if (game.status !== 'started') throw new BadRequestError(`The game is not started yet`)
@@ -106,7 +106,7 @@ export default class GameController {
       game.status = 'finished'
     }
     else {
-      game.turn = player.symbol === 'x' ? 'o' : 'x'
+      game.round += 1
     }
     game.board = update.board
     await game.save()

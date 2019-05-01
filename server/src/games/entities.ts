@@ -28,6 +28,12 @@ export class Game extends BaseEntity {
   @Column('text', {default: 'pending'})
   status: Status
 
+  @Column('json', {default: emptyBoard})
+  board1: Board
+
+  @Column('json', {default: emptyBoard})
+  board2: Board
+
   // this is a relation, read more about them here:
   // http://typeorm.io/#/many-to-one-one-to-many-relations
   @OneToMany(_ => Player, player => player.game, {eager:true})
