@@ -7,7 +7,7 @@ import { userId } from '../../jwt'
 import Paper from '@material-ui/core/Paper'
 import Board from './Board'
 import './GameDetails.css'
-import { findX } from './Validation'
+import { findX, nextPossible } from './Validation'
 
 class GameDetails extends PureComponent {
 
