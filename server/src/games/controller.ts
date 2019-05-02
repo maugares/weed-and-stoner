@@ -81,12 +81,33 @@ export default class GameController {
     @Param('id') gameId: number,
     @Body() update: any
   ) {
-    console.log('update test:', update.game.board1)
+    console.log('update test:', update.game)
 
-    const game = await update.game
+    const game = await Game.findOneById(gameId)
     if (!game) throw new NotFoundError(`Game does not exist`)
 
-    const player = await Player.findOne({ user, game })
+    const updateBoard = update.game
+
+    const { board, board1, board2, userPlay } = updateBoard
+    console.log('board\n', board, '\nboard1\n', board1, '\nboard2\n', board2, '\nUserPlay\n', userPlay)
+
+
+    if (userPlay === 1) {
+      game.board1 = updateBoard.board1
+    } else if (userPlay === 2) {
+      game.board2 = updateBoard.board2
+    }
+    game.save()
+
+    const b1b2Same = (JSON.stringify(game.board1) === JSON.stringify(game.board2))
+
+    console.log(b1b2Same)
+
+    // if(b1b2Same) {
+
+    // }
+
+    // const player = await Player.findOne({ user, game })
 
     // console.log('game:', game)
 
@@ -108,7 +129,7 @@ export default class GameController {
     else {
       game.round += 1
     }
-   
+
     game.board = update.board
     await game.save()
 

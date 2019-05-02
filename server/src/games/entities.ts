@@ -19,8 +19,8 @@ export class Game extends BaseEntity {
   @Column('json', {default: emptyBoard})
   board: Board
 
-  @Column('char', {length:1, default: 'x'})
-  round: number
+  @Column('char', {length:1, default: 0})
+  userSymbol: number
 
   @Column('char', {length:1, nullable: true})
   winner: Symbol
@@ -33,6 +33,9 @@ export class Game extends BaseEntity {
 
   @Column('json', {default: emptyBoard})
   board2: Board
+
+  @Column('char', {length:1, default: 0})
+  userPlay: number
 
   // this is a relation, read more about them here:
   // http://typeorm.io/#/many-to-one-one-to-many-relations
