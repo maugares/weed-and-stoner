@@ -79,16 +79,55 @@ export default class GameController {
   async updateGame(
     @CurrentUser() user: User,
     @Param('id') gameId: number,
-    @Body() update: GameUpdate
+    @Body() update: any
   ) {
+    // console.log('update test:', update.game)
+
     const game = await Game.findOneById(gameId)
     if (!game) throw new NotFoundError(`Game does not exist`)
 
-    const player = await Player.findOne({ user, game })
+    const updateBoard = update.game
 
-    const players = game.players
+    const { board, board1, board2, userPlay, clickedCell1, clickedCell2 } = updateBoard
 
-    console.log('game:', game)
+    // Coordinates of X
+    const clickCoords1 = clickedCell1.split("-")
+    const [x1, y1] = clickCoords1
+    console.log('board1:', board1[x1][y1])
+
+    // Coordinates of O
+    const clickCoords2 = clickedCell2.split("-")
+    const [x2, y2] = clickCoords2
+    console.log('board2:', board2[x2][y2])
+
+    if (userPlay === 1) {
+      game.board2 = updateBoard.board2
+      game.clickedCell2 = updateBoard.clickedCell2
+    } else if (userPlay === 2) {
+      game.board2 = updateBoard.board2
+      game.clickedCell2 = updateBoard.clickedCell2
+    }
+    game.save()
+
+    const b1b2Same = (JSON.stringify(game.clickedCell1) === JSON.stringify(game.clickedCell2))
+
+    // console.log(board1)
+
+    // if (!b1b2Same) {
+    //   game.board = update.board
+    //   await game.save()
+
+    //   io.emit('action', {
+    //     type: 'UPDATE_GAME',
+    //     payload: game
+    //   })
+
+    //   return game
+    // }
+
+    // const player = await Player.findOne({ user, game })
+
+    // console.log('game:', game)
 
     if (!player) throw new ForbiddenError(`You are not part of this game`)
     if (game.status !== 'started') throw new BadRequestError(`The game is not started yet`)
@@ -108,15 +147,6 @@ export default class GameController {
     else {
       game.round += 1
     }
-    game.board = update.board
-    await game.save()
-
-    io.emit('action', {
-      type: 'UPDATE_GAME',
-      payload: game
-    })
-
-    return game
   }
 
   @Authorized()

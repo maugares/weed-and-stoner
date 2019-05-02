@@ -22,33 +22,39 @@ class GameDetails extends PureComponent {
 
   makeMove = (toRow, toCell) => {
     const { game, updateGame, userId } = this.props
-    // const clicked = [toRow, toCell]
-    // const objX = findX(game.board)
-    // const nextCells = nextPossible(objX)
-    // console.log('objX:', objX)
-    // console.log('nextCells:', nextCells)
-    // console.log('Clicked:', clicked)
+    const clicked = [toRow, toCell]
+    console.log('Clicked:', clicked)
     console.log('User clicking:', userId)
-    // console.log('Game:', game)
 
     if (userId === 1) {
       const board1 = game.board1.map(
         (row, rowIndex) => row.map((cell, cellIndex) => {
-          if (rowIndex === toRow && cellIndex === toCell) return game.round
-          else return cell
+          if (rowIndex === toRow && cellIndex === toCell) {
+            return 'x'
+          } else {
+            return cell
+          }
         })
       )
-      console.log(board1)
-      updateGame(game.id, board1)
+      game.board1 = board1
+      game.clickedCell1 = `${toRow}-${toCell}`
+      game.userPlay = userId
+      updateGame(game.id, game)
+
     } else if (userId === 2) {
       const board2 = game.board2.map(
         (row, rowIndex) => row.map((cell, cellIndex) => {
-          if (rowIndex === toRow && cellIndex === toCell) return game.round
-          else return cell
+          if (rowIndex === toRow && cellIndex === toCell) {
+            return 'o'
+          } else {
+            return cell
+          }
         })
       )
-      console.log(board2)
-      updateGame(game.id, board2)
+      game.board2 = board2
+      game.clickedCell2 = `${toRow}-${toCell}`
+      game.userPlay = userId
+      updateGame(game.id, game)
     }
   }
 
