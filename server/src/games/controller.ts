@@ -79,16 +79,16 @@ export default class GameController {
   async updateGame(
     @CurrentUser() user: User,
     @Param('id') gameId: number,
-    @Body() update: GameUpdate
+    @Body() update: any
   ) {
-    const game = await Game.findOneById(gameId)
+    console.log('update test:', update.game.board1)
+
+    const game = await update.game
     if (!game) throw new NotFoundError(`Game does not exist`)
 
     const player = await Player.findOne({ user, game })
 
-    const players = game.players
-
-    console.log('game:', game)
+    // console.log('game:', game)
 
     if (!player) throw new ForbiddenError(`You are not part of this game`)
     if (game.status !== 'started') throw new BadRequestError(`The game is not started yet`)
@@ -108,6 +108,7 @@ export default class GameController {
     else {
       game.round += 1
     }
+   
     game.board = update.board
     await game.save()
 

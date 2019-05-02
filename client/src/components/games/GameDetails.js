@@ -25,17 +25,25 @@ class GameDetails extends PureComponent {
     const clicked = [toRow, toCell]
     console.log('Clicked:', clicked)
     console.log('User clicking:', userId)
-    // console.log('Game:', game)
 
     if (userId === 1) {
       const board1 = game.board1.map(
         (row, rowIndex) => row.map((cell, cellIndex) => {
-          if (rowIndex === toRow && cellIndex === toCell) return game.round
-          else return cell
+          if (rowIndex === toRow && cellIndex === toCell) {
+            // console.log('game.round:', game.round)
+            return game.round
+          } else {
+            // console.log('cell:', cell)
+            return cell
+          }
         })
       )
-      console.log(board1)
-      updateGame(game.id, board1)
+      game.board1 = board1
+      console.log('game board1:', game)
+      updateGame(game.id, game)
+      
+
+      
     } else if (userId === 2) {
       const board2 = game.board2.map(
         (row, rowIndex) => row.map((cell, cellIndex) => {
@@ -43,8 +51,8 @@ class GameDetails extends PureComponent {
           else return cell
         })
       )
-      console.log(board2)
       updateGame(game.id, board2)
+      console.log(game)
     }
   }
 
