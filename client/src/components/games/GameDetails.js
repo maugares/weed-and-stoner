@@ -37,20 +37,22 @@ class GameDetails extends PureComponent {
         })
       )
       game.board1 = board1
+      game.clickedCell1 = `${toRow}-${toCell}`
       game.userPlay = userId
       updateGame(game.id, game)
-      
+
     } else if (userId === 2) {
       const board2 = game.board2.map(
         (row, rowIndex) => row.map((cell, cellIndex) => {
           if (rowIndex === toRow && cellIndex === toCell) {
-            return 'x'
-          } else { 
+            return 'o'
+          } else {
             return cell
           }
         })
       )
       game.board2 = board2
+      game.clickedCell2 = `${toRow}-${toCell}`
       game.userPlay = userId
       updateGame(game.id, game)
     }
