@@ -2,7 +2,7 @@ import React from 'react'
 import './Board.css'
 import { findX, nextPossible } from './Validation'
 
-const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, nextCells) => {
+const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, foundX, nextCells) => {
   const nextCell = nextCells[0]
 
   const possibleArray = nextCell.map(possibility => {
@@ -12,9 +12,26 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, nextCells) =>
     return possibleArray
   })
 
-  const isPossible = possibleArray.indexOf(true) > -1  
+  const chosenArray = foundX.arrX.map(chosen => {
+    const chosenArray =
+      chosen[0] === rowIndex && 
+      chosen[1] === cellIndex
+    return chosenArray
+  })
 
-  if (isPossible) {
+  const isPossible = possibleArray.indexOf(true) > -1 
+  const isChosen = chosenArray.indexOf(true) > -1
+
+  if (isChosen) {
+    return (
+      <button 
+        className="board-tile-chosen"
+        disabled={hasTurn}
+        onClick={() => makeMove(rowIndex, cellIndex)}
+        key={`${rowIndex}-${cellIndex}`}
+      >{symbol || '-'}</button>
+    )
+  } else if (isPossible) {
     return (
       <button 
         className="board-tile-possible"
@@ -35,8 +52,9 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, nextCells) =>
 }
 
 export default ({ game, makeMove }) => game.board.map((cells, rowIndex) => {
-  const nextCells = nextPossible(findX(game.board))
+  const foundX = findX(game.board)
+  const nextCells = nextPossible(foundX)
   return < div key={rowIndex} >
-    {cells.map((symbol, cellIndex) => renderCel(makeMove, rowIndex, cellIndex, symbol, false, nextCells))}
+    {cells.map((symbol, cellIndex) => renderCel(makeMove, rowIndex, cellIndex, symbol, false, foundX, nextCells))}
   </div >
 })

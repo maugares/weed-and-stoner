@@ -90,15 +90,15 @@ export default class GameController {
 
     const { board, board1, board2, userPlay, clickedCell1, clickedCell2 } = updateBoard
 
+    // Coordinates of X
     const clickCoords1 = clickedCell1.split("-")
     const [x1, y1] = clickCoords1
     console.log('board1:', board1[x1][y1])
 
-
+    // Coordinates of O
     const clickCoords2 = clickedCell2.split("-")
     const [x2, y2] = clickCoords2
     console.log('board2:', board2[x2][y2])
-
 
     if (userPlay === 1) {
       game.board2 = updateBoard.board2
