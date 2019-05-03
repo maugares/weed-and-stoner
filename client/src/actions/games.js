@@ -74,12 +74,16 @@ export const updateGame = (gameId, game) => (dispatch, getState) => {
 
   if (isExpired(jwt)) return dispatch(logout())
 
-  console.log('Action game:', game)
-
+  const url = `${baseUrl}/games/${gameId}`
+  // console.log('update url test:', url)
   request
-    .patch(`${baseUrl}/games/${gameId}`)
+    .patch(url)
     .set('Authorization', `Bearer ${jwt}`)
     .send({ game })
-    .then(_ => dispatch(updateGameSuccess()))
+    .then(response => {
+      // console.log('response test:', response)
+
+      dispatch(updateGameSuccess())
+    })
     .catch(err => console.error(err))
 }
