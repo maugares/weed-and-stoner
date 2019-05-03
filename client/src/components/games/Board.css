@@ -5,6 +5,7 @@
   background-color: rgb(200, 148, 148);
   height: 100px;
   width: 100px;
+  color: rgba(0,0,0,0);
 }
 
 .board-tile-chosen {
@@ -14,6 +15,7 @@
   background-color: rgba(13, 109, 13, 0.3);
   height: 100px;
   width: 100px;
+  color: rgba(0,0,0,0);
 }
 
 .board-tile-possible {
@@ -24,4 +26,5 @@
   border-width: 7px;
   height: 100px;
   width: 100px;
+  color: rgba(0,0,0,0);
 }

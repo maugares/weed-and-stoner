@@ -27,7 +27,6 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, foundX, nextC
       <button 
         className="board-tile-chosen"
         disabled={hasTurn}
-        onClick={() => makeMove(rowIndex, cellIndex)}
         key={`${rowIndex}-${cellIndex}`}
       >{symbol || '-'}</button>
     )
