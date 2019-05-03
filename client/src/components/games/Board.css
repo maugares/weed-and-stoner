@@ -27,7 +27,6 @@ body {
   background-size: 39px;
   opacity: 0.4;
   border-width: 7px;
-<<<<<<< HEAD
   height: 100px;
   width: 100px;
 }
@@ -36,8 +35,6 @@ body {
   border-color: rgb(36, 240, 36);
   background-size: 101px;
   cursor: pointer;
-
-=======
   height: 40px;
   width: 40px;
   color: rgba(0,0,0,0);
@@ -51,5 +48,4 @@ body {
     height: 40px;
     width: 40px;
     color: rgba(0,0,0,0);
->>>>>>> b716284db117ad2e7e6c9cb893866804059af85d
 }
