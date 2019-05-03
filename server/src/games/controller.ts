@@ -90,7 +90,7 @@ export default class GameController {
     const updateBoard = update.game
     // Destructure updateBoard in useful elements
     const { clickedCell } = updateBoard
-  
+
     // Update the DB with the cells chosen by the players
     if (user.id === 1) {
       // Get coordinates of o
@@ -119,17 +119,15 @@ export default class GameController {
     const b1b2Same = b1 === b2
     const allPlayed = game.played1 && game.played2
 
+    function markCell(clickedCell, symbol) {
+      const [rowIndex, columnIndex] = clickedCell.split('-')
+      if (game) game.board[rowIndex][columnIndex] = symbol
+    }
+
     console.log('!b1b2Same\n', !b1b2Same, '\nallPlayed\n', allPlayed)
 
     if (!b1b2Same && allPlayed) {
-      // console.log('game.board before:\n', game.board)
-      // console.log('board:\n', board)
-      function markCell (clickedCell, symbol) {
-        const [rowIndex, columnIndex] = clickedCell.split('-')
-        if (game) game.board[rowIndex][columnIndex] = symbol
-      }
       markCell(game.clickedCell1, 'x')
-      markCell(game.clickedCell2, 'o')
 
       console.log('game.board after:\n', game.board)
       game.clickedCell1 = '---'
@@ -144,8 +142,20 @@ export default class GameController {
         payload: game
       })
       return game
-    } else {
+    } else if (b1b2Same && allPlayed) {
+      markCell(game.clickedCell2, 'o')      
       console.log('game.board after:\n', game.board)
+      game.clickedCell1 = '---'
+      game.clickedCell2 = '---'
+      game.played1 = 0
+      game.played2 = 0
+
+      await game.save()
+
+      io.emit('action', {
+        type: 'UPDATE_GAME',
+        payload: game
+      })
       return game
     }
   }

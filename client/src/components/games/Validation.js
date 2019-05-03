@@ -12,7 +12,21 @@ export const findX = (board) => {
   return { arrX, arrXs }
 }
 
-export const nextPossible = (obj) => {
+export const findO = (board) => {
+  const arrX = []
+  const arrXs = []
+  for (let row = 0; row < board.length; row++) {
+    for (let cell = 0; cell < board[row].length; cell++) {
+      if (board[row][cell] === 'o') {
+        arrX.push([row, cell])
+        arrXs.push(`[${row},${cell}]`)
+      }
+    }
+  }
+  return { arrX, arrXs }
+}
+
+export const symbolArray = (obj) => {
   const { arrX, arrXs } = obj
   const posRaw = []
   for (let i = 0; i < arrX.length; i++) {

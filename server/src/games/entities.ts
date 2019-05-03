@@ -8,7 +8,7 @@ export type Board = [Row, Row, Row]
 type Status = 'pending' | 'started' | 'finished'
 
 const emptyRow: Row = [null, null, null]
-const emptyBoard: Board = [['x', null, null], emptyRow, emptyRow]
+const emptyBoard: Board = [emptyRow, [null, 'x', null], emptyRow]
 
 @Entity()
 export class Game extends BaseEntity {
@@ -29,7 +29,7 @@ export class Game extends BaseEntity {
   status: Status
 
   @Column('json', { default: emptyBoard })
-  board1: Board
+  blocked: Board
 
   @Column('json', { default: emptyBoard })
   board2: Board

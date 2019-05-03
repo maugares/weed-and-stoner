@@ -1,5 +1,5 @@
 .board-tile {
-  background-image: url("http://pixelartmaker.com/art/834c8e37145a362.png");
+  background-image: url("../../img/brown_brick.png");
   background-size: 98px;
   opacity: 0.8;
   background-color: rgb(200, 148, 148);
@@ -27,4 +27,14 @@
   height: 100px;
   width: 100px;
   color: rgba(0,0,0,0);
+}
+
+.board-tile-blocked {
+    background-image: url("../../img/grey_brick.png");
+    background-size: 98px;
+    opacity: 0.8;
+    background-color: rgb(200, 148, 148);
+    height: 100px;
+    width: 100px;
+    color: rgba(0,0,0,0);
 }
