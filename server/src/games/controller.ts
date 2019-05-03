@@ -3,18 +3,9 @@ import {
   Body, Patch
 } from 'routing-controllers'
 import User from '../users/entity'
-import { Game, Player, Board } from './entities'
-import { IsBoard, isValidTransition, calculateWinner, finished } from './logic'
-import { Validate } from 'class-validator'
+import { Game, Player } from './entities'
+import { calculateWinner, finished } from './logic'
 import { io } from '../index'
-
-class GameUpdate {
-
-  @Validate(IsBoard, {
-    message: 'Not a valid board'
-  })
-  board: Board
-}
 
 @JsonController()
 export default class GameController {
@@ -81,7 +72,6 @@ export default class GameController {
     @Param('id') gameId: number,
     @Body() update: any
   ) {
-    // console.log('\n\ngameId XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX test:\n\n', gameId)
 
     // Get saved game from the DB
     const game = await Game.findOneById(gameId)
@@ -95,23 +85,14 @@ export default class GameController {
     // Update the DB with the cells chosen by the players
     if (user.id === 1) {
       // Get coordinates of o
-      const clickCoords1 = clickedCell.split("-")
-      // console.log('clickCoords1\n', clickCoords1)
       game.clickedCell1 = clickedCell
       game.played1 = 1
     } else if (user.id === 2) {
       // Get coordinates of o
-      const clickCoords2 = clickedCell.split("-")
-      // console.log('clickCoords2\n', clickCoords2)
       game.clickedCell2 = clickedCell
       game.played2 = 1
     }
     await game.save()
-
-    // console.log('played1\n', game.played1 === 1)
-    // console.log('played2\n', game.played2 === 1)
-    // console.log('p1:\n', game.played1 === 1)
-    // console.log('p2:\n', game.played2 === 1)
 
     // Evaluate if the chosen cell is the same
     const b1 = game.clickedCell1
@@ -125,30 +106,21 @@ export default class GameController {
       if (game) game.board[rowIndex][columnIndex] = symbol
     }
 
-    // console.log('!b1b2Same\n', !b1b2Same, '\nallPlayed\n', allPlayed)
-
     if (!b1b2Same && allPlayed) {
       markCell(game.clickedCell1, 'x')
-
-      // console.log('game.board after:\n', game.board)
       game.clickedCell1 = '---'
       game.clickedCell2 = '---'
       game.played1 = 0
       game.played2 = 0
     } else if (b1b2Same && allPlayed) {
       markCell(game.clickedCell2, 'o')      
-      // console.log('game.board after:\n', game.board)
       game.clickedCell1 = '---'
       game.clickedCell2 = '---'
       game.played1 = 0
       game.played2 = 0
     }
-
-    // console.log('game before save test:', game)
-
     await game.save()
 
-    // console.log('game before emit test:', game)
     io.emit('action', {
       type: 'UPDATE_GAME',
       payload: game

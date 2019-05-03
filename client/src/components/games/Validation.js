@@ -1,5 +1,3 @@
-import { symbol } from "prop-types";
-
 export const findX = (board) => {
   const arrX = []
   const arrXs = []
