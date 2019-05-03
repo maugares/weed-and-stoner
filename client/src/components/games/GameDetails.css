@@ -3,4 +3,22 @@
   margin: auto;
   padding: 20px;
   width: 60%;
+  align-content: center
+}
+
+.score-board {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.board-container{
+  display: flex;
+  justify-content: center;
+}
+
+p{
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
 }

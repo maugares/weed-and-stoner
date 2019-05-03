@@ -40,8 +40,6 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, foundX, nextC
   const isChosen = chosenArray.indexOf(true) > -1
   const isBlocked = blockedArray.indexOf(true) > -1
 
-  console.log('chosenArray',chosenArray.length === 0)
-
   if (chosenArray.length === 0) {
     return (
       <button
@@ -88,7 +86,6 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, foundX, nextC
 }
 
 export default ({ game, makeMove }) => game.board.map((cells, rowIndex) => {
-  console.log(cells)
   const foundX = findX(game.board)
   const nextCells = symbolArray(foundX, cells.length)
   const foundO = findO(game.board)

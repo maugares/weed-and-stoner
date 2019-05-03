@@ -94,6 +94,24 @@ export default class GameController {
     }
     await game.save()
 
+    const countSymbol = (board, symbol) => {
+      const arrX = []
+      for (let row = 0; row < board.length; row++) {
+        for (let cell = 0; cell < board[row].length; cell++) {
+          if (board[row][cell] === symbol) {
+            arrX.push([row, cell])
+          }
+        }
+      }
+      return arrX.length
+    }
+
+    const nX = countSymbol(game.board, 'x')
+    const nO = countSymbol(game.board, 'o')
+    console.log('\n\nnumber of X:\n\n', nX)
+    console.log('\n\nnumber of Y:\n\n', nO)
+    // game.winner = symbol
+
     // Evaluate if the chosen cell is the same
     const b1 = game.clickedCell1
     const b2 = game.clickedCell2
@@ -112,12 +130,14 @@ export default class GameController {
       game.clickedCell2 = '---'
       game.played1 = 0
       game.played2 = 0
+      game.points1 += 100
     } else if (b1b2Same && allPlayed) {
-      markCell(game.clickedCell2, 'o')      
+      markCell(game.clickedCell2, 'o')
       game.clickedCell1 = '---'
       game.clickedCell2 = '---'
       game.played1 = 0
       game.played2 = 0
+      game.points2 += 150
     }
     await game.save()
 
@@ -141,4 +161,32 @@ export default class GameController {
   getGames() {
     return Game.find()
   }
+}
+
+const symbolArray = (obj, size) => {
+  const { arrX, arrXs } = obj
+  const posRaw = []
+  for (let i = 0; i < arrX.length; i++) {
+    let row = arrX[i][0]
+    let col = arrX[i][1]
+
+    const arr = [
+      row - 1 > -1 ? posRaw.push(`${[row - 1, col]}`) : null,
+      row + 1 < (size + 1) ? posRaw.push(`${[row + 1, col]}`) : null,
+      col - 1 > - 1 ? posRaw.push(`${[row, col - 1]}`) : null,
+      col + 1 < (size + 1) ? posRaw.push(`${[row, col + 1]}`) : null
+    ]
+  }
+
+  const unique = [...new Set(posRaw)]
+    .map(u => {
+      if (arrXs.includes(`[${u}]`)) {
+        return null
+      } else {
+        const split = u.split(",")
+        return [parseInt(split[0]), parseInt(split[1])]
+      }
+    })
+    .filter(u => u != null)
+  return [unique]
 }

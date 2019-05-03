@@ -8,7 +8,7 @@ export type Board = [Row, Row, Row, Row, Row, Row, Row, Row, Row]
 type Status = 'pending' | 'started' | 'finished'
 
 const emptyRow: Row = [null, null, null, null, null, null, null, null, null]
-const emptyBoard: Board = [emptyRow, emptyRow, emptyRow, emptyRow, [null, null, null, null, 'x', null, null, null, null],emptyRow, emptyRow, emptyRow, emptyRow]
+const emptyBoard: Board = [emptyRow, emptyRow, emptyRow, emptyRow, [null, null, null, null, 'x', null, null, null, null], emptyRow, emptyRow, emptyRow, emptyRow]
 
 @Entity()
 export class Game extends BaseEntity {
@@ -40,6 +40,17 @@ export class Game extends BaseEntity {
   @Column('char', { length: 3, default: '---' })
   clickedCell2: string
 
+  @Column('integer', { default: 0 })
+  points1: number
+
+  @Column('integer', { default: 0 })
+  points2: number
+
+  @Column('integer', { default: 0 })
+  nX: number
+
+  @Column('integer', { default: 0 })
+  nY: number
 
   // this is a relation, read more about them here:
   // http://typeorm.io/#/many-to-one-one-to-many-relations
