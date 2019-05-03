@@ -4,7 +4,6 @@ import { findX, findO, symbolArray } from './Validation'
 
 const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, foundX, nextCells, blockedCells, foundO) => {
   const nextCell = nextCells[0]
-  console.log('found0', foundO.arrX[0])
 
   const possibleArray = nextCell.map(possibility => {
     const possibleArray =
@@ -12,6 +11,16 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, foundX, nextC
       possibility[1] === cellIndex
     return possibleArray
   })
+
+  const getArray = (found) => {
+    const array = found
+    array.arrX.map(element => {
+      const elementArray =
+        element[0] === rowIndex &&
+        element[1] === cellIndex
+      return elementArray
+    })
+  }
 
   const chosenArray = foundX.arrX.map(chosen => {
     const chosenArray =
