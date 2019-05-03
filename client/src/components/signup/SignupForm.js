@@ -27,7 +27,7 @@ export default class SignupForm extends PureComponent {
   						this.state.email || ''
   					} onChange={ this.handleChange } />
           </label>
-  					
+
   				<label>
             Password
   					<input type="password" name="password" value={
@@ -46,10 +46,10 @@ export default class SignupForm extends PureComponent {
   					this.state.password &&
   					this.state.confirmPassword &&
   					this.state.password !== this.state.confirmPassword &&
-  					<p style={{color:'red'}}>The passwords do not match!</p>
+  					<p style={{color:'red'}}>The passwords don't match!</p>
   				}
 
-  				<button type="submit">Sign up</button>
+  				<button type="submit">Sign up!</button>
   			</form>
       </div>
 		)

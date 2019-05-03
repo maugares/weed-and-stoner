@@ -1,5 +1,15 @@
 body {
-  margin: 0;
-  padding: 0;
+  color: white;
+  margin: 4px;
+  padding: 15px;
   font-family: sans-serif;
+  background-color: rgb(18, 19, 70)
 }
+
+label {
+  height: 50px;
+  display: center;
+  align-items: center
+}
+
+

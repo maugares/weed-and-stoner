@@ -1,3 +1,26 @@
+body {
+  padding: 15px;
+}
+
 .signup-form label {
   display: block;
+  margin: 15px 20px 20px 23px;
+  padding-left: 0.4em;
+
 }
+
+.signup-form {
+  white-space: nowrap;
+
+}
+
+label {
+  height: 50px;
+  display: center;
+  align-items: center
+}
+
+input {
+  margin-left: 15px;
+}
+

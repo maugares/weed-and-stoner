@@ -7,15 +7,16 @@ import {withRouter} from 'react-router'
 import {userId} from '../../jwt'
 import {connect} from 'react-redux'
 import AccountIcon from '@material-ui/icons/AccountBox'
+import './TopBar.css'
 
 const TopBar = (props) => {
   const { location, history, user } = props
 
   return (
-    <AppBar position="absolute" style={{zIndex:10}}>
-      <Toolbar>
+    <AppBar position="absolute" background-color="fuchsia" style={{zIndex:10}}>
+      <Toolbar className="toolbar">
         <Typography variant="title" color="inherit" style={{flex: 1}}>
-          Multiplayer Tic Tac Toe
+          Multiplayer Weed and Stoner
         </Typography>
         {
           user &&
@@ -24,11 +25,11 @@ const TopBar = (props) => {
 
         {
           location.pathname.indexOf('signup') > 0 &&
-          <Button color="inherit" onClick={() => history.push('/login')}>Login</Button>
+          <Button color="inherit" onClick={() => history.push('/login')}>Login </Button>
         }
         {
           location.pathname.indexOf('login') > 0 &&
-          <Button color="inherit" onClick={() => history.push('/signup')}>Sign up</Button>
+          <Button color="inherit" onClick={() => history.push('/signup')}>Sign up </Button>
         }
         {
           location.pathname.indexOf('games/') > 0 &&
