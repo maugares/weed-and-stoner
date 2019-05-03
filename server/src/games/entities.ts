@@ -8,7 +8,7 @@ export type Board = [Row, Row, Row]
 type Status = 'pending' | 'started' | 'finished'
 
 const emptyRow: Row = [null, null, null]
-const emptyBoard: Board = [emptyRow, emptyRow, emptyRow]
+const emptyBoard: Board = [['x', null, null], emptyRow, emptyRow]
 
 @Entity()
 export class Game extends BaseEntity {
@@ -20,7 +20,7 @@ export class Game extends BaseEntity {
   board: Board
 
   @Column('char', { length: 1, default: 0 })
-  userSymbol: number
+  userMoving: number
 
   @Column('char', { length: 1, nullable: true })
   winner: Symbol
@@ -34,14 +34,17 @@ export class Game extends BaseEntity {
   @Column('json', { default: emptyBoard })
   board2: Board
 
-  @Column('char', { length: 1, default: 0 })
-  userPlay: number
+  @Column('int', { default: 0 })
+  played1: number
 
-  @Column('char', { length: 3, nullable: true })
-  clickedCell1: number
+  @Column('int', { default: 0 })
+  played2: number
 
-  @Column('char', { length: 3, nullable: true })
-  clickedCell2: number
+  @Column('char', { length: 3, default: '---' })
+  clickedCell1: string
+
+  @Column('char', { length: 3, default: '---' })
+  clickedCell2: string
 
 
   // this is a relation, read more about them here:

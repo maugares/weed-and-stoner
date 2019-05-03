@@ -25,35 +25,14 @@ class GameDetails extends PureComponent {
     const clicked = [toRow, toCell]
     console.log('Clicked:', clicked)
     console.log('User clicking:', userId)
+    console.log('game', game)
 
     if (userId === 1) {
-      const board1 = game.board1.map(
-        (row, rowIndex) => row.map((cell, cellIndex) => {
-          if (rowIndex === toRow && cellIndex === toCell) {
-            return 'x'
-          } else {
-            return cell
-          }
-        })
-      )
-      game.board1 = board1
-      game.clickedCell1 = `${toRow}-${toCell}`
-      game.userPlay = userId
+      game.clickedCell = `${toRow}-${toCell}`
       updateGame(game.id, game)
 
     } else if (userId === 2) {
-      const board2 = game.board2.map(
-        (row, rowIndex) => row.map((cell, cellIndex) => {
-          if (rowIndex === toRow && cellIndex === toCell) {
-            return 'o'
-          } else {
-            return cell
-          }
-        })
-      )
-      game.board2 = board2
-      game.clickedCell2 = `${toRow}-${toCell}`
-      game.userPlay = userId
+      game.clickedCell = `${toRow}-${toCell}`
       updateGame(game.id, game)
     }
   }
@@ -61,6 +40,10 @@ class GameDetails extends PureComponent {
 
   render() {
     const { game, users, authenticated, userId } = this.props
+
+    const userRole = userId === 1 ? 'Weed' : "Stoner"
+
+    console.log('userRole:', userRole)
 
     if (!authenticated) return (
       <Redirect to="/login" />
@@ -78,7 +61,7 @@ class GameDetails extends PureComponent {
     return (<Paper className="outer-paper">
       <h1>Game #{game.id}</h1>
 
-      <p>Status: {game.status}</p>
+      <p>Role: {userRole}</p>
 
       {
         game.status === 'started' &&
