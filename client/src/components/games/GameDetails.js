@@ -103,12 +103,12 @@ class GameDetails extends PureComponent {
 
       <div class='score-board'>
         <div class='player-container'>
-          <div>Weed</div>
-          <div>{game.points1}</div>
+          <div class='player'>Weed</div>
+          <div class='points'>{game.points1}</div>
         </div>
         <div>
-          <div>Stoner</div>
-          <div>{game.points2}</div>
+          <div class='player'>Stoner</div>
+          <div class='points'>{game.points2}</div>
         </div>
       </div>
     </Paper>)
