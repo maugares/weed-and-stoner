@@ -1,3 +1,5 @@
+import { symbol } from "prop-types";
+
 export const findX = (board) => {
   const arrX = []
   const arrXs = []
@@ -12,7 +14,21 @@ export const findX = (board) => {
   return { arrX, arrXs }
 }
 
-export const nextPossible = (obj) => {
+export const findO = (board) => {
+  const arrX = []
+  const arrXs = []
+  for (let row = 0; row < board.length; row++) {
+    for (let cell = 0; cell < board[row].length; cell++) {
+      if (board[row][cell] === 'o') {
+        arrX.push([row, cell])
+        arrXs.push(`[${row},${cell}]`)
+      }
+    }
+  }
+  return { arrX, arrXs }
+}
+
+export const symbolArray = (obj, size) => {
   const { arrX, arrXs } = obj
   const posRaw = []
   for (let i = 0; i < arrX.length; i++) {
@@ -21,9 +37,9 @@ export const nextPossible = (obj) => {
 
     const arr = [
       row - 1 > -1 ? posRaw.push(`${[row - 1, col]}`) : null,
-      row + 1 < 3 ? posRaw.push(`${[row + 1, col]}`) : null,
+      row + 1 < (size+1) ? posRaw.push(`${[row + 1, col]}`) : null,
       col - 1 > - 1 ? posRaw.push(`${[row, col - 1]}`) : null,
-      col + 1 < 3 ? posRaw.push(`${[row, col + 1]}`) : null
+      col + 1 < (size+1) ? posRaw.push(`${[row, col + 1]}`) : null
     ]
   }
 

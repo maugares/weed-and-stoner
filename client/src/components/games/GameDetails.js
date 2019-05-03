@@ -22,38 +22,13 @@ class GameDetails extends PureComponent {
 
   makeMove = (toRow, toCell) => {
     const { game, updateGame, userId } = this.props
-    const clicked = [toRow, toCell]
-    console.log('Clicked:', clicked)
-    console.log('User clicking:', userId)
 
     if (userId === 1) {
-      const board1 = game.board1.map(
-        (row, rowIndex) => row.map((cell, cellIndex) => {
-          if (rowIndex === toRow && cellIndex === toCell) {
-            return 'x'
-          } else {
-            return cell
-          }
-        })
-      )
-      game.board1 = board1
-      game.clickedCell1 = `${toRow}-${toCell}`
-      game.userPlay = userId
+      game.clickedCell = `${toRow}-${toCell}`
       updateGame(game.id, game)
 
     } else if (userId === 2) {
-      const board2 = game.board2.map(
-        (row, rowIndex) => row.map((cell, cellIndex) => {
-          if (rowIndex === toRow && cellIndex === toCell) {
-            return 'o'
-          } else {
-            return cell
-          }
-        })
-      )
-      game.board2 = board2
-      game.clickedCell2 = `${toRow}-${toCell}`
-      game.userPlay = userId
+      game.clickedCell = `${toRow}-${toCell}`
       updateGame(game.id, game)
     }
   }
@@ -61,6 +36,10 @@ class GameDetails extends PureComponent {
 
   render() {
     const { game, users, authenticated, userId } = this.props
+
+    const userRole = userId === 1 ? 'Weed' : "Stoner"
+
+    // console.log('game:', this.props.game)
 
     if (!authenticated) return (
       <Redirect to="/login" />
@@ -75,40 +54,60 @@ class GameDetails extends PureComponent {
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0]
 
-    return (<Paper className="outer-paper">
-      <h1>Game #{game.id}</h1>
+    const message = () => {
+      // console.log('userId test:', userId)
+      // console.log("game:", game)
+      if (userId === 1) {
+        if (game.played1 === 0) {
+          return 'Pick a possible tile (translucid ones)'
+        } else {
+          return `Waiting for oponent`
+        }
+      } else if (userId === 2) {
+        if (game.played2 === 0) {
+          return 'Pick a possible tile (translucid ones)'
+        } else {
+          return `Waiting for oponent`
+        }
+      }
+    }
 
-      <p>Status: {game.status}</p>
+      return (<Paper className="outer-paper">
+        <h1>Game #{game.id}</h1>
 
-      {
-        game.status === 'started' &&
-        player && player.symbol === game.turn &&
-        <div>It's your turn!</div>
-      }
-      {
-        game.status === 'pending' &&
-        game.players.map(p => p.userId).indexOf(userId) === -1 &&
-        <button onClick={this.joinGame}>Join Game</button>
-      }
-      {
-        winner &&
-        <p>Winner: {users[winner].firstName}</p>
-      }
-      <hr />
-      {
-        game.status !== 'pending' &&
-        <Board game={game} makeMove={this.makeMove} />
-      }
-    </Paper>)
+        <p>Role: {userRole}</p>
+
+        <p>{message()}</p>
+
+        {
+          game.status === 'started' &&
+          player && player.symbol === game.turn &&
+          <div>It's your turn!</div>
+        }
+        {
+          game.status === 'pending' &&
+          game.players.map(p => p.userId).indexOf(userId) === -1 &&
+          <button onClick={this.joinGame}>Join Game</button>
+        }
+        {
+          winner &&
+          <p>Winner: {users[winner].firstName}</p>
+        }
+        <hr />
+        {
+          game.status !== 'pending' &&
+          <Board game={game} makeMove={this.makeMove} />
+        }
+      </Paper>)
+    }
   }
-}
-const mapStateToProps = (state, props) => ({
-  authenticated: state.currentUser !== null,
-  userId: state.currentUser && userId(state.currentUser.jwt),
-  game: state.games && state.games[props.match.params.id],
-  users: state.users
-})
-const mapDispatchToProps = {
-  getGames, getUsers, joinGame, updateGame
-}
-export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)
+  const mapStateToProps = (state, props) => ({
+    authenticated: state.currentUser !== null,
+    userId: state.currentUser && userId(state.currentUser.jwt),
+    game: state.games && state.games[props.match.params.id],
+    users: state.users
+  })
+  const mapDispatchToProps = {
+    getGames, getUsers, joinGame, updateGame
+  }
+  export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)

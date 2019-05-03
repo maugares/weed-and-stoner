@@ -3,28 +3,31 @@ body {
 }
 
 .board-tile {
-  background-image: url("http://pixelartmaker.com/art/834c8e37145a362.png");
-  background-size: 98px;
+  background-image: url("../../img/brown_brick.png");
+  background-size: 39px;
   opacity: 0.8;
   background-color: rgb(200, 148, 148);
-  height: 100px;
-  width: 100px;
+  height: 40px;
+  width: 40px;
+  color: rgba(0,0,0,0);
 }
 
 .board-tile-chosen {
   background-image: url("https://images.cdn4.stockunlimited.net/preview1300/pixel-art-plant_1959586.jpg");
-  background-size: 98px;
+  background-size: 39px;
   opacity: 0.8;
   background-color: rgba(13, 109, 13, 0.3);
-  height: 100px;
-  width: 100px;
+  height: 40px;
+  width: 40px;
+  color: rgba(0,0,0,0);
 }
 
 .board-tile-possible {
   background-image: url("http://pixelartmaker.com/art/834c8e37145a362.png");
-  background-size: 98px;
+  background-size: 39px;
   opacity: 0.4;
   border-width: 7px;
+<<<<<<< HEAD
   height: 100px;
   width: 100px;
 }
@@ -34,4 +37,19 @@ body {
   background-size: 101px;
   cursor: pointer;
 
+=======
+  height: 40px;
+  width: 40px;
+  color: rgba(0,0,0,0);
+}
+
+.board-tile-blocked {
+    background-image: url("../../img/grey_brick.png");
+    background-size: 39px;
+    opacity: 0.8;
+    background-color: rgb(200, 148, 148);
+    height: 40px;
+    width: 40px;
+    color: rgba(0,0,0,0);
+>>>>>>> b716284db117ad2e7e6c9cb893866804059af85d
 }

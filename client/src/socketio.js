@@ -9,7 +9,10 @@ export default class SocketIO {
     this.socket = io.connect(baseUrl, {
       query: `auth_token=${jwt}`
     });
-    this.socket.on('action', payload => dispatch(payload))
+    this.socket.on('action', payload => {
+      // console.log('payload test:', payload)
+      dispatch(payload)
+    })
   }
 
   disconnect() {
