@@ -1,3 +1,5 @@
+import { symbol } from "prop-types";
+
 export const findX = (board) => {
   const arrX = []
   const arrXs = []
@@ -26,7 +28,7 @@ export const findO = (board) => {
   return { arrX, arrXs }
 }
 
-export const symbolArray = (obj) => {
+export const symbolArray = (obj, size) => {
   const { arrX, arrXs } = obj
   const posRaw = []
   for (let i = 0; i < arrX.length; i++) {
@@ -35,9 +37,9 @@ export const symbolArray = (obj) => {
 
     const arr = [
       row - 1 > -1 ? posRaw.push(`${[row - 1, col]}`) : null,
-      row + 1 < 3 ? posRaw.push(`${[row + 1, col]}`) : null,
+      row + 1 < (size+1) ? posRaw.push(`${[row + 1, col]}`) : null,
       col - 1 > - 1 ? posRaw.push(`${[row, col - 1]}`) : null,
-      col + 1 < 3 ? posRaw.push(`${[row, col + 1]}`) : null
+      col + 1 < (size+1) ? posRaw.push(`${[row, col + 1]}`) : null
     ]
   }
 

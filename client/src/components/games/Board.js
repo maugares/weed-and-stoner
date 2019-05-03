@@ -40,7 +40,18 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, foundX, nextC
   const isChosen = chosenArray.indexOf(true) > -1
   const isBlocked = blockedArray.indexOf(true) > -1
 
-  if (isChosen) {
+  console.log('chosenArray',chosenArray.length === 0)
+
+  if (chosenArray.length === 0) {
+    return (
+      <button
+        className="board-tile-possible"
+        disabled={hasTurn}
+        onClick={() => makeMove(rowIndex, cellIndex)}
+        key={`${rowIndex}-${cellIndex}`}
+      >{symbol || '-'}</button>
+    )
+  } else if (isChosen) {
     return (
       <button
         className="board-tile-chosen"
@@ -77,10 +88,11 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, foundX, nextC
 }
 
 export default ({ game, makeMove }) => game.board.map((cells, rowIndex) => {
+  console.log(cells)
   const foundX = findX(game.board)
-  const nextCells = symbolArray(foundX)
+  const nextCells = symbolArray(foundX, cells.length)
   const foundO = findO(game.board)
-  const blockedCells = symbolArray(foundO)
+  const blockedCells = symbolArray(foundO, cells.length)
   return < div key={rowIndex} >
     {cells.map((symbol, cellIndex) => renderCel(makeMove, rowIndex, cellIndex, symbol, false, foundX, nextCells, blockedCells, foundO))}
   </div >
