@@ -137,7 +137,7 @@ export default class GameController {
       game.clickedCell2 = '---'
       game.played1 = 0
       game.played2 = 0
-      game.points2 += 150
+      game.points2 += 300
     }
     await game.save()
 
