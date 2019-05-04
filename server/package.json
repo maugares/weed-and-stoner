@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "engine": "11",
   "main": "target/index.js",
-  "private": true,
+  // "private": true,
   "scripts": {
     "start": "node .",
     "dev": "nodemon .",
@@ -39,6 +39,7 @@
     "uws": "^99.0.0"
   },
   "engines": {
-    "node": "^11.12.0"
+    "node": "^11.12.0",
+    "npm": "^6.7.0"
   }
 }
