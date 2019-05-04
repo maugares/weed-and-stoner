@@ -31,7 +31,7 @@ coverage
 build/Release
 
 # Dependency directories
-node_modules
+/node_modules
 jspm_packages
 
 # Optional npm cache directory
@@ -46,5 +46,5 @@ jspm_packages
 # Output of 'npm pack'
 *.tgz
 
-target
+# target
 .vscode
