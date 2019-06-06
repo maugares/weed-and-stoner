@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "engine": "11",
   "main": "target/index.js",
-  // "private": true,
+  "private": true,
   "scripts": {
     "start": "node .",
     "dev": "nodemon .",
@@ -21,6 +21,7 @@
     "@types/mocha": "^2.2.48",
     "@types/socket.io": "^1.4.32",
     "bcrypt": "^3.0.4",
+    "docker": "^1.0.0",
     "jsonwebtoken": "^8.2.0",
     "kcors": "^2.2.1",
     "koa": "^2.5.0",
@@ -39,7 +40,7 @@
     "uws": "^99.0.0"
   },
   "engines": {
-    "node": "^11.12.0",
+    "node": "^12.4.0",
     "npm": "^6.7.0"
   }
 }
