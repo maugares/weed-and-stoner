@@ -1,8 +1,8 @@
-import React, {PureComponent} from 'react'
-import {getGames, createGame} from '../../actions/games'
-import {getUsers} from '../../actions/users'
-import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import React, { PureComponent } from 'react'
+import { getGames, createGame } from '../../actions/games'
+import { getUsers } from '../../actions/users'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import { Card, CardActions, CardContent } from '@material-ui/core'
@@ -51,11 +51,11 @@ class GamesList extends PureComponent {
   }
 
   render() {
-    const {games, users, authenticated, createGame} = this.props
+    const { games, users, authenticated, createGame } = this.props
 
     if (!authenticated) return (
-			<Redirect to="/login" />
-		)
+      <Redirect to="/login" />
+    )
 
     if (games === null || users === null) return null
 
@@ -83,4 +83,4 @@ const mapStateToProps = state => ({
     null : Object.values(state.games).sort((a, b) => b.id - a.id)
 })
 
-export default connect(mapStateToProps, {getGames, getUsers, createGame})(GamesList)
+export default connect(mapStateToProps, { getGames, getUsers, createGame })(GamesList)
