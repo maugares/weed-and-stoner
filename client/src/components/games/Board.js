@@ -12,15 +12,15 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, foundX, nextC
     return possibleArray
   })
 
-  // const getArray = (found) => {
-  //   const array = found
-  //   array.arrX.map(element => {
-  //     const elementArray =
-  //       element[0] === rowIndex &&
-  //       element[1] === cellIndex
-  //     return elementArray
-  //   })
-  // }
+  const getArray = (found) => {
+    const array = found
+    array.arrX.map(element => {
+      const elementArray =
+        element[0] === rowIndex &&
+        element[1] === cellIndex
+      return elementArray
+    })
+  }
 
   const chosenArray = foundX.arrX.map(chosen => {
     const chosenArray =
